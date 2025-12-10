@@ -1,0 +1,86 @@
+.message-container {
+  height: 15px;             /* reserve vertical space */
+  display: flex;
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+}
+
+.message {
+  margin-top: 80px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: inherit;
+}
+
+.mainContent{
+  margin-top: 100px;
+}
+
+
+.inputField {
+  margin-top:600px;
+  padding: 10px 14px;
+  font-size: 15px;
+  width: 35%; /* Reduced width */
+  margin: 16px auto;
+  display: block;
+  border: 1px solid #497e7e;
+  border-radius: 6px;
+  outline: none;
+  background-color: #d1e7e2;
+  color: #103333;
+}
+
+.inputField::placeholder {
+  color: #476b6b;
+}
+
+
+.table-container {
+  padding: 20px;
+  margin-top: -10px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 60%;
+  margin-left: 7%;
+  border-collapse: collapse; 
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Header */
+.table thead th {
+  background-color: #2a4f4f; /* Deep teal */
+  color: #e0f2f1; /* Light teal text */
+  padding: 14px 16px;
+}
+
+
+.table th {
+  text-align: left;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.table td {
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #0e1f1f; /* Deep text color */
+  border-top: 1px solid #6ba69b;
+}
+/* Table Body Rows */
+.table tbody tr {
+  background-color: #a8d1c5;  /* Soft teal */
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #76b3ab; /* Brighter teal on hover */
+  cursor: pointer;
+}
+
+/* Table Data Cells */

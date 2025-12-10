@@ -1,0 +1,81 @@
+.Card_Div {
+  background: rgba(115, 190, 143, 0.3); /* soft greenish tint with transparency */
+  backdrop-filter: blur(3px);           /* subtle blur */
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  height: 250px;
+  color: #1a1a1a;                       /* dark text for readability */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* gentle shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.Card_Div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.Card_Div h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #2c3e50; /* dark blue */
+}
+
+.Card_Div p {
+  font-size: 1rem;
+  margin: 4px 0;
+  line-height: 1.4;
+  color: #34495e; /* medium dark blue */
+}
+
+.Card_Div .status {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  align-self: flex-start;
+  color: #2c3e50;
+}
+
+
+.Card_Div select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(63, 61, 61);
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  width: 120px;
+}
+
+.Card_Div select:hover,
+.Card_Div select:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.Card_Div button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #e67e22; /* warm orange */
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  align-self: flex-start;
+  user-select: none;
+  width:100px;
+  margin-left: 80px;
+}
+
+.Card_Div button:hover {
+  background-color: #cf6b17;
+}

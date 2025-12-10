@@ -1,0 +1,62 @@
+.navDiv {
+  display: flex;
+  flex-wrap: wrap; /* good: handles responsiveness */
+  height: 60px;
+  width: 100%;
+  padding: 0 20px; /* add horizontal spacing inside navbar */
+  background: linear-gradient(to right, #44b6a7, #8db9b4);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(167, 166, 166, 0.2);
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: fixed; /* optional: make navbar stick to top */
+  top: 0;
+  left: 0;
+  }
+
+
+
+.linkDiv {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    width:660px;
+    margin-left: 13%;
+    margin-top: -5px;
+  }
+
+  /* Style links inside the nav */
+.linkDiv a {
+  color: #00363a;
+  text-decoration: none;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+  .logout-button {
+    background-color: #e63946;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    height: 36px;
+    transition: background 0.3s ease;
+  }
+
+  .logout-button:hover {
+    background-color: #c92a37;
+  }
+
+.nav-link{
+  color:rgb(236, 236, 236);
+}
+
+.nav-link.active {
+   color: hsl(0, 4%, 84%);
+   font-weight:900;
+}

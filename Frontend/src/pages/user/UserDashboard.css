@@ -1,0 +1,53 @@
+.cardContainer {
+  display: flex;
+  gap: 12px; /* reduced gap between cards */
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cardDiv {
+  background: rgba(255, 255, 255, 0.1); /* transparent so gradient shows through */
+  backdrop-filter: blur(8px); /* glass effect */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 200px;
+  color: white; /* text stays readable */
+}
+
+
+.cardDiv:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+.cardDiv h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.cardDiv p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+.task-btn {
+   background: #5f71d4; /* Warm orange for strong contrast */
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  width:300px;
+  margin-left: 39%;;
+  transition: 0.3s;
+}
+
+.task-btn:hover {
+  background: #2c6cf5;
+  transform: scale(1.05);
+}

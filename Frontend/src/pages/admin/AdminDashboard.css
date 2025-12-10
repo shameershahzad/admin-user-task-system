@@ -1,0 +1,85 @@
+.welcome-heading {
+  margin-top: 90px;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+
+  /* Gradient animated text */
+  background: linear-gradient(270deg, #ffffff, #00ffc3, #ffffff);
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  /* Animations */
+  animation: gradientShift 6s ease infinite, moveLeftRight 3s ease-in-out infinite alternate;
+
+  /* Optional soft glow or remove if it adds black */
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes moveLeftRight {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+
+
+  .cardContainer {
+    display: flex;
+    margin-top: 4%;
+
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .cardDiv {
+    background-color: rgba(255, 255, 255, 0.15); /* translucent white for contrast */
+    color: #ffffff;
+    width: 220px;
+    height: 130px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .cardDiv:hover {
+    transform: translateY(-8px);
+    cursor: pointer;
+  }
+
+  .cardDiv h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #f0f0f0;
+  }
+
+  .cardDiv p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: #ffffff;
+  }
+
