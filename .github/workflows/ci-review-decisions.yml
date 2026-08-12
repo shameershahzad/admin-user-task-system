@@ -36,6 +36,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $prNumber = "${{ github.event.issue.number }}"
-          $sha = gh pr view $prNumber --json headRefOid -q .headRefOid --repo ${{ github.repository }}
-          $state = if ("${{ steps.sentra.outputs.all_resolved }}" -eq "True") { "success" } else { "pending" }
-          gh api "repos/${{ github.repository }}/statuses/$sha" -f state=$state -f context=process-decision -f description="Sentra review decision processed"
+          $repo = "${{ github.repository }}"
+          $headers = @{ Authorization =
