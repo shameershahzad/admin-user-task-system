@@ -1,8 +1,13 @@
-name: Sentra Review Decisions
+def build_review_decisions_yaml() -> str:
+    return """name: Sentra Review Decisions
 
 on:
   issue_comment:
     types: [created]
+
+permissions:
+  statuses: write
+  pull-requests: read
 
 jobs:
   process-decision:
@@ -10,6 +15,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Send decision to Sentra
+        id: sentra
         shell: powershell
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
@@ -23,3 +29,18 @@ jobs:
           Write-Host "Accepted: $($response.accepted -join ', ')"
           Write-Host "Rejected: $($response.rejected -join ', ')"
           Write-Host "All resolved: $($response.all_resolved)"
+          echo "all_resolved=$($response.all_resolved)" >> $env:GITHUB_OUTPUT
+
+      - name: Report status to GitHub
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $prNumber = "${{ github.event.issue.number }}"
+          $sha = gh pr view $prNumber --json headRefOid -q .headRefOid --repo ${{ github.repository }}
+          $state = if ("${{ steps.sentra.outputs.all_resolved }}" -eq "True") { "success" } else { "pending" }
+          gh api "repos/${{ github.repository }}/statuses/$sha" `
+            -f state=$state `
+            -f context=process-decision `
+            -f description="Sentra review decision processed"
+"""
