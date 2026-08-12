@@ -55,13 +55,14 @@ jobs:
 
   build_test_lint:
     name: Build, Test & Lint
-    needs: gateway
+    needs: [gateway, rescan]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Run project build/test/lint
         shell: powershell
         run: |
-          Write-Host "REPLACE ME: add your real build command"
-          Write-Host "REPLACE ME: add your real test command"
-          Write-Host "REPLACE ME: add your real lint command"
+          npm ci
+          npm run build --if-present
+          npm test
+          npm run lint --if-present
