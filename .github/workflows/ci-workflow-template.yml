@@ -39,7 +39,7 @@ jobs:
         shell: powershell
         run: |
           $scanId = "${{ steps.trigger.outputs.scan_id }}"
-          for ($i = 0; $i -lt 60; $i++) {
+          for ($i = 0; $i -lt 180; $i++) {
             $status = Invoke-RestMethod -Uri "http://localhost:8000/api/projects/${{ vars.SENTRA_PROJECT_ID }}/ci-scan-status/$scanId" -Headers @{ "X-Sentra-Api-Key" = "${{ secrets.SENTRA_API_KEY }}" }
             Write-Host "Scan status: $($status.status)"
             if ($status.status -eq "completed") {
