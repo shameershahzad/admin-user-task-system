@@ -1,8 +1,6 @@
 name: Sentra CI/CD Pipeline
-
 on:
   pull_request:
-
 jobs:
   gateway:
     name: Gateway - Verify Pipeline Configured
@@ -24,7 +22,6 @@ jobs:
             Write-Host "::error::This workflow still has placeholder build/test/lint commands. A DevOps engineer must replace them below (in .github/workflows/ci-workflow-template.yml) before this pipeline can run."
             exit 1
           }
-
   rescan:
     name: Sentra Blind Re-scan
     needs: gateway
@@ -56,7 +53,6 @@ jobs:
           }
           Write-Host "::error::Timed out waiting for Sentra scan to finish."
           exit 1
-
   build_test_lint:
     name: Build, Test & Lint
     needs: [gateway, rescan]
