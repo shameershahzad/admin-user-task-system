@@ -1,5 +1,4 @@
-def build_review_decisions_yaml() -> str:
-    return """name: Sentra Review Decisions
+name: Sentra Review Decisions
 
 on:
   issue_comment:
@@ -39,8 +38,4 @@ jobs:
           $prNumber = "${{ github.event.issue.number }}"
           $sha = gh pr view $prNumber --json headRefOid -q .headRefOid --repo ${{ github.repository }}
           $state = if ("${{ steps.sentra.outputs.all_resolved }}" -eq "True") { "success" } else { "pending" }
-          gh api "repos/${{ github.repository }}/statuses/$sha" `
-            -f state=$state `
-            -f context=process-decision `
-            -f description="Sentra review decision processed"
-"""
+          gh api "repos/${{ github.repository }}/statuses/$sha" -f state=$state -f context=process-decision -f description="Sentra review decision processed"
