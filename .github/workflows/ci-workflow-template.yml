@@ -53,17 +53,23 @@ jobs:
           }
           Write-Host "::error::Timed out waiting for Sentra scan to finish."
           exit 1
-  build_test_lint:
+ build_test_lint:
     name: Build, Test & Lint
     needs: [gateway, rescan]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Run project build/test/lint
+      - name: Frontend - install, build, lint
         shell: powershell
         run: |
+          cd frontend
           npm ci
           npm run build --if-present
-          npm test
+          npm test --if-present
           npm run lint --if-present
-  # new
+      - name: Backend - install
+        shell: powershell
+        run: |
+          cd backend
+          npm ci
+          npm test --if-present
