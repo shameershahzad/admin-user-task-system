@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import "./ForgotPassword.css"
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useParams } from 'react-router-dom'
 
 function ForgotPassword() {
     const [updatePassword,setupdatePassword] = useState('')
     const [message,setMessage] = useState('')
     const nav = useNavigate()
+    const {email} = useParams()
 
     useEffect(() => {
         if(message){
@@ -22,7 +23,7 @@ function ForgotPassword() {
             nav("/")
         },1000)
             }else{
-                axios.put("http://localhost:3007/register/updatePassword",{password:updatePassword})
+                axios.put(`http://localhost:3007/register/updatePassword/${email}`,{newPassword:updatePassword})
                 .then(result => {
                     if(result){
                         setMessage("✅ Password updated!")

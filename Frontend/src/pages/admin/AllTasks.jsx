@@ -109,7 +109,7 @@ const viewCompleteTask = () => {
     <div className='mainContent'>
       <div className='input-button-div'>
       <button onClick={viewPendingTask}>View Pending Task</button>
-      <input type = "text" className='inputField' value={filterTaskInput} onChange={handleFilterTask} placeholder='Search User...'/>
+      <input type = "text" className='inputField' value={filterTaskInput} onChange={handleFilterTask} placeholder='Search title of task...'/>
       <button onClick={viewCompleteTask}>View Complete Task Task</button>
       </div>
     <div className='table-container'>

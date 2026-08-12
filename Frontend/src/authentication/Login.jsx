@@ -7,7 +7,7 @@ function Login() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [message,setMessage] = useState('')
-     const navigate = useNavigate()
+    const navigate = useNavigate()
 
   
 const handleSubmit = (e) => {
@@ -75,6 +75,7 @@ const handleSubmit = (e) => {
         .catch((err) => {
           if(err.response?.data?.message === "Email doesn't exist"){
             setMessage("Email doesn't exist!")
+            setEmail("")
           }
         })
      }
