@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./AdminNavbar.css"
-import { useNavigate,NavLink, useParams } from 'react-router-dom'
+import { useNavigate,NavLink} from 'react-router-dom'
 import axios from 'axios'
 
 
