@@ -37,4 +37,25 @@ jobs:
         run: |
           $prNumber = "${{ github.event.issue.number }}"
           $repo = "${{ github.repository }}"
-          $headers = @{ Authorization =
+          $token = $env:GH_TOKEN
+
+          $headers = @{}
+          $headers["Authorization"] = "Bearer $token"
+          $headers["Accept"] = "application/vnd.github+json"
+
+          $pr = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/pulls/$prNumber" -Headers $headers
+          $sha = $pr.head.sha
+
+          $allResolved = "${{ steps.sentra.outputs.all_resolved }}"
+          $state = "pending"
+          if ($allResolved -eq "True") {
+            $state = "success"
+          }
+
+          $body = @{}
+          $body["state"] = $state
+          $body["context"] = "process-decision"
+          $body["description"] = "Sentra review decision processed"
+          $jsonBody = $body | ConvertTo-Json
+
+          Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/statuses/$sha" -Method POST -Headers $headers -ContentType "application/json" -Body $jsonBody
