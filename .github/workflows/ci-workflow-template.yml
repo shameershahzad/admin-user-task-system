@@ -45,8 +45,12 @@ jobs:
           for ($i = 0; $i -lt 60; $i++) {
             $status = Invoke-RestMethod -Uri "http://localhost:8000/api/projects/${{ vars.SENTRA_PROJECT_ID }}/ci-scan-status/$scanId" -Headers @{ "X-Sentra-Api-Key" = "${{ secrets.SENTRA_API_KEY }}" }
             Write-Host "Scan status: $($status.status)"
-            if ($status.status -eq "completed" -or $status.status -eq "failed") {
+            if ($status.status -eq "completed") {
               exit 0
+            }
+            if ($status.status -eq "failed" -or $status.status -eq "cancelled") {
+              Write-Host "::error::Sentra scan ended with status '$($status.status)' instead of completing."
+              exit 1
             }
             Start-Sleep -Seconds 10
           }
