@@ -9,7 +9,7 @@ function CreateTask() {
   const [dueDate,setdueDate] = useState('')
   const [description,setDescription] = useState('')
   const [userEmail,setuserEmail] = useState('')
-  const [status,setStatus] = useState("pending")
+  const [status] = useState("pending")
   const [message,setMessage] = useState('')
   
 
