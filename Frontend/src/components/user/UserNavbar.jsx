@@ -30,7 +30,7 @@ function UserNavbar() {
     <>
     <div className='nav-div'>
   <img src="/Task_Logo.ico" alt="App Icon" width={40} height={37}  style={{ marginTop:"-13px",marginLeft:"9px" }}  />
-      <h1 style = {{marginLeft:"-286px",marginTop:"10px", color: "#00363a",fontWeight:"bold"}}><i>Taskity</i></h1>
+      <h1 style = {{marginLeft:"-260px",marginTop:"10px", color: "#00363a",fontWeight:"bold"}}><i>Taskity</i></h1>
         <div className='link-div'>
       <NavLink className={({isActive }) => isActive? "nav-link active" : "nav-link"} to = {`/userDashboard/${email}`}>Dashboard</NavLink>
       <NavLink className={({isActive }) => isActive? "nav-link active" : "nav-link"} to={`/myTask/${email}`}>My Task</NavLink>

@@ -10,12 +10,13 @@ const verifyToken = (req,res,next) => {
     const token = authHeader.split(" ")[1];
 
     try{
-        const decoded = jwt.verify(token,"Your Secret Key");
+const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = decoded.id;
         next();
     }
     catch(err){
-          return res.status(403).json("Invalid Token")
+          console.log("Error",err)
+          return res.status(403).json("Invalid Token");
     }
 }
 

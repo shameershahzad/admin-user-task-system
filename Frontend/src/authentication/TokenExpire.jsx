@@ -33,7 +33,7 @@ const TokenExpire = ({ children }) => {
 
         return () => clearTimeout(timer);
       }
-    } catch (err) {
+    } catch {
       setExpired(true);
       localStorage.removeItem("token");
       alert("Invalid session token. Please log in again.");

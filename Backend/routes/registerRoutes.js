@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
       return res.json({ message: "Incorrect password" });
     }
 
-    const token = jwt.sign({ id: user._id }, "Your Secret Key", { expiresIn: "1h" });
+const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     res.status(200).json({ message: `Login as ${user.role}`, token});
   } catch (err) {
@@ -45,12 +45,12 @@ try{
 }
 })
 
-router.put("/updatePassword",async(req,res) => {
-    const {password} = req.body;
+router.put("/updatePassword/:email",async(req,res) => {
+    const {newPassword} = req.body;
     try{
-        const hashPassword = await bcrypt.hash(password,10)
+        const hashPassword = await bcrypt.hash(newPassword,10)
     
-         const updatePass = await registerModel.updateOne({email:req.params.email   ,password:hashPassword});
+         const updatePass = await registerModel.updateOne({email:req.params.email},{$set:{password:hashPassword}});
          if(updatePass){
             return res.status(200).json({message:"Password updated"})
          }

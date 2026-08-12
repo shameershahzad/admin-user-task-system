@@ -7,7 +7,21 @@ const userRoutes = require("./routes/userRoutes")
 
 connectDB()
 
-const app = express()
+const adminRoutes = require("./routes/adminRoutes")
+const userRoutes = require("./routes/userRoutes")
+
+connectDB()
+
+const app = express();
+app.use(express.json())
+app.use(cors())
+app.use(require('csurf')());
+
+
+// The routes would typically be mounted here, e.g.:
+// app.use('/api/admin', adminRoutes);
+// app.use('/api/user', userRoutes);
+app.use(require('csurf')());
 
 
 app.use(express.json())
