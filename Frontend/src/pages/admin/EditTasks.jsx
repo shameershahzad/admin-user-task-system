@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import axios from 'axios'
+import api from '../../api/axios'
 import { useNavigate,useParams } from 'react-router-dom'
 
 function EditTasks() {
@@ -11,11 +11,9 @@ function EditTasks() {
     const [originalTask,setoriginalTask] = useState({title:"",dueDate:"",userEmail:"",status:'',description:""})
 
 
-    const token = localStorage.getItem("token");
-
        useEffect(() => {
-    
-    axios.get("http://localhost:3007/admin/sendUseronEditTask",{headers:{Authorization:`Bearer ${token}`}})
+
+    api.get("/admin/sendUseronEditTask")
     .then(result => {
       console.log(result.data.result)
       setfetchUser(result.data.result)
@@ -26,11 +24,7 @@ function EditTasks() {
    },[])
 
     useEffect(() => {
-     axios.get(`http://localhost:3007/admin/prevTask/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+     api.get(`/admin/prevTask/${id}`)
  .then(res => {
     const task = res.data;
     console.log(task)
@@ -57,7 +51,7 @@ function EditTasks() {
     nav("/allTasks");
   },1500)
 });
-}, [id]);
+}, [id, nav]);
 
     useEffect(() => {
        if(message){
@@ -79,11 +73,7 @@ function EditTasks() {
   }
 else{
 
-  axios.put(`http://localhost:3007/admin/editTask/${id}`, editTask, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  api.put(`/admin/editTask/${id}`, editTask)
   .then(() => {
     setMessage("✅ Task updated");
     setTimeout(() => {

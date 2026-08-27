@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import "./AdminNavbar.css"
 import { useNavigate,NavLink} from 'react-router-dom'
-import axios from 'axios'
+import api from '../../api/axios'
 
 
 function AdminNavbar() {
     const nav = useNavigate()
     const [email,setEmail] = useState("")
-    const token = localStorage.getItem("token")
-  
+
   const logOutBtn = () => {
     localStorage.removeItem("token")
     console.log("Token deleted!")
@@ -16,7 +15,7 @@ function AdminNavbar() {
   } 
 
   useEffect(() => {
-    axios.get("http://localhost:3007/admin/emailSendOnNavbar",{headers:{Authorization:`Bearer ${token}`}})
+    api.get("/admin/emailSendOnNavbar")
     .then(result => {
      console.log(result.data[0].email)
      setEmail(result.data[0].email)

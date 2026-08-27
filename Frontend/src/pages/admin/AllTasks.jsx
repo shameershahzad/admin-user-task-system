@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from '../../api/axios'
 import "./AllTasks.css"
 import { useNavigate } from 'react-router-dom'
 
@@ -13,8 +13,6 @@ function AllTasks() {
 
   const taskArray = Object.values(fetchTask)
   const nav = useNavigate()
-
-  const token = localStorage.getItem("token")
 
 
   const handleFilterTask = (e) => {
@@ -38,11 +36,7 @@ function AllTasks() {
   }
 
   const deleteTask = (id) => {
-     axios.delete(`http://localhost:3007/admin/deleteTask/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}` 
-    }
-  })
+     api.delete(`/admin/deleteTask/${id}`)
   .then(() => {
     setMessage("✅ Task Deleted");
     setfetchTask(prev => prev.filter(item => item._id !== id));
@@ -61,7 +55,7 @@ function AllTasks() {
 },[message])
 
 const viewPendingTask = () => {
-    axios.get("http://localhost:3007/admin/allPendingTasks",{headers:{Authorization:`Bearer ${token}`}})
+    api.get("/admin/allPendingTasks")
     .then(result => {
       if(result.data.message === "Task found" && result.data.result.length > 0){
         console.log(result.data.result)
@@ -81,7 +75,7 @@ const viewPendingTask = () => {
 }
 
 const viewCompleteTask = () => {
-     axios.get("http://localhost:3007/admin/allCompleteTasks",{headers:{Authorization:`Bearer ${token}`}})
+     api.get("/admin/allCompleteTasks")
     .then(result => {
       if(result.data.message === "Task found" && result.data.result.length > 0){
         console.log(result.data.result)

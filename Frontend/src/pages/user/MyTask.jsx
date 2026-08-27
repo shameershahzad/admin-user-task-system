@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from "axios"
+import api from "../../api/axios"
 import { useState,useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import "./MyTask.css"
@@ -9,10 +9,9 @@ function MyTask() {
   const [usertaskCard,setusertaskCard] = useState([])
   const [updatedTask,setupdatedTask] = useState({})
   const [message,setMessage] = useState('')
-  const token = localStorage.getItem("token")
 
   useEffect(() => {
-   axios.get(`http://localhost:3007/user/showUserTaskInCard/${email}`,{headers:{Authorization:`Bearer ${token}`}})
+   api.get(`/user/showUserTaskInCard/${email}`)
    .then(result => {
     if(result.data.result.length === 0){
       setMessage("No task available")
@@ -22,11 +21,11 @@ function MyTask() {
     console.log(result.data.result);
     setusertaskCard(result.data.result)
    }).catch(err => console.log("Error:",err))
-  },[updatedTask])
+  },[updatedTask, email])
 
   const updateTask = (id) => {
   
-      axios.put(`http://localhost:3007/user/updateTask/${id}`,{status:updatedTask[id]},{headers:{Authorization:`Bearer ${token}`}})
+      api.put(`/user/updateTask/${id}`,{status:updatedTask[id]})
         .then(result => {
           console.log(result)
           setupdatedTask(result)

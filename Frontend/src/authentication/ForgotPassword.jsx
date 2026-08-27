@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./ForgotPassword.css"
-import axios from 'axios'
+import api from '../api/axios'
 import { useNavigate,useParams } from 'react-router-dom'
 
 function ForgotPassword() {
@@ -23,7 +23,7 @@ function ForgotPassword() {
             nav("/")
         },1000)
             }else{
-                axios.put(`http://localhost:3007/register/updatePassword/${email}`,{newPassword:updatePassword})
+                api.put(`/register/updatePassword/${email}`,{newPassword:updatePassword})
                 .then(result => {
                     if(result){
                         setMessage("✅ Password updated!")
