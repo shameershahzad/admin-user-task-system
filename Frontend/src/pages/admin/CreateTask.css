@@ -1,5 +1,7 @@
 .taskDiv {
-  background: #1e2f2f;
+  background: rgba(20, 30, 60, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 24px 32px;
   border-radius: 12px;
   width: 100%;
