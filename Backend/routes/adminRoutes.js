@@ -2,22 +2,23 @@ const express = require("express")
 const registerModel = require("../model/registerModel")
 const taskModel = require("../model/taskModel")
 const verifyToken = require("../middleware/verifyToken")
+const requireAdmin = require("../middleware/requireAdmin")
 const router = express.Router()
 
 
-router.get("/adminName/:email",verifyToken,(req,res) => {
+router.get("/adminName/:email",verifyToken,requireAdmin,(req,res) => {
      registerModel.find({role:"Admin",email:req.params.email},{name:1,_id:0})
     .then(result => res.status(200).json(result))
     .catch(err => res.status(500).json({message:err.message }))
 })
 
-router.get("/emailSendOnNavbar",verifyToken,(req,res) => {
+router.get("/emailSendOnNavbar",verifyToken,requireAdmin,(req,res) => {
      registerModel.find({role:"Admin"},{email:1})
     .then(result => res.status(200).json(result))
     .catch(err => res.status(500).json({message:err.message }))
 })
 
-router.get("/showCardsOnDashboard",verifyToken,async(req,res) => {
+router.get("/showCardsOnDashboard",verifyToken,requireAdmin,async(req,res) => {
     try{
          const countAllUsers = await registerModel.countDocuments({role:"User"}) 
         
@@ -42,7 +43,7 @@ router.get("/showCardsOnDashboard",verifyToken,async(req,res) => {
 })
 
 
-router.get("/allUsers",verifyToken,async(req,res) => {
+router.get("/allUsers",verifyToken,requireAdmin,async(req,res) => {
     try{
         const fetchUsers = await registerModel.find({role:"User"})
     
@@ -56,7 +57,7 @@ router.get("/allUsers",verifyToken,async(req,res) => {
     }
 })
 
-router.get("/sendUseronCreateTask",verifyToken,async(req,res) => {
+router.get("/sendUseronCreateTask",verifyToken,requireAdmin,async(req,res) => {
     try{
         const foundUser = await registerModel.find({role:"User"},{email:1,name:1});
 
@@ -71,7 +72,7 @@ router.get("/sendUseronCreateTask",verifyToken,async(req,res) => {
     }
 })
 
-router.get("/sendUseronEditTask",verifyToken,async(req,res) => {
+router.get("/sendUseronEditTask",verifyToken,requireAdmin,async(req,res) => {
     try{
         const foundUser = await registerModel.find({role:"User"},{email:1});
 
@@ -86,7 +87,7 @@ router.get("/sendUseronEditTask",verifyToken,async(req,res) => {
     }
 })
 
-router.post("/createTask",verifyToken,async(req,res) => {
+router.post("/createTask",verifyToken,requireAdmin,async(req,res) => {
     try{
         const addTask = await taskModel.create(req.body)
          
@@ -100,7 +101,7 @@ router.post("/createTask",verifyToken,async(req,res) => {
     }     
 })
 
-router.get("/allPendingTasks",verifyToken,async(req,res) => {
+router.get("/allPendingTasks",verifyToken,requireAdmin,async(req,res) => {
     try{
         const fetchTasks = await taskModel.find({status:"pending"})
     
@@ -114,7 +115,7 @@ router.get("/allPendingTasks",verifyToken,async(req,res) => {
     }
 })
 
-router.get("/allCompleteTasks",verifyToken,async(req,res) => {
+router.get("/allCompleteTasks",verifyToken,requireAdmin,async(req,res) => {
     try{
         const fetchTasks = await taskModel.find({status:"complete"})
     
@@ -128,7 +129,7 @@ router.get("/allCompleteTasks",verifyToken,async(req,res) => {
     }
 })
 
-router.get("/prevTask/:id",verifyToken, (req, res) => {
+router.get("/prevTask/:id",verifyToken,requireAdmin, (req, res) => {
   const { id } = req.params;
  
   taskModel.findOne({_id:id})   
@@ -141,7 +142,7 @@ router.get("/prevTask/:id",verifyToken, (req, res) => {
     .catch(err => res.status(500).json({ error: err.message }));
 });
 
-router.put("/editTask/:id", verifyToken, (req, res) => {
+router.put("/editTask/:id", verifyToken,requireAdmin, (req, res) => {
   taskModel.findOneAndUpdate(
     { _id: req.params.id },
     req.body // update data you send from frontend
@@ -150,7 +151,7 @@ router.put("/editTask/:id", verifyToken, (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-router.delete("/deleteTask/:id",verifyToken,(req,res) => {
+router.delete("/deleteTask/:id",verifyToken,requireAdmin,(req,res) => {
      taskModel.findOneAndDelete({ _id: req.params.id})
         .then(deleted => res.json({ message: "Task deleted successfully", deleted }))
         .catch(err => res.status(500).json(err));

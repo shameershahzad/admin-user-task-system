@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useParams} from 'react-router-dom'
-import axios from 'axios'
+import api from '../../api/axios'
 import "./AdminDashboard.css"
 
 function AdminDashboard() {
   const [adminName,setadminName] = useState(null)
   const [cardsData,setCardsData] = useState([])
-  const token = localStorage.getItem("token")
   const {email} = useParams()
 
 
 
   useEffect(() => {
-     axios.get(`http://localhost:3007/admin/adminName/${email}`,{headers:{Authorization:`Bearer ${token}`}})
-     .then(res => { 
+     api.get(`/admin/adminName/${email}`)
+     .then(res => {
       console.log(res.data[0])
       setadminName(res.data[0])
      }).catch(err => console.log("Error:",err))
-  },[])
-    
+  },[email])
+
   useEffect(() => {
-   axios.get("http://localhost:3007/admin/showCardsOnDashboard",{headers:{Authorization:`Bearer ${token}`}})
+   api.get("/admin/showCardsOnDashboard")
     .then(result => {
       console.log(result.data.result)
       setCardsData(result.data.result)

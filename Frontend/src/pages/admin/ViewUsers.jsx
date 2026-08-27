@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import api from '../../api/axios'
 import {useEffect} from "react"
 import "./ViewUser.css"
 
@@ -9,12 +9,11 @@ function ViewUsers() {
     const [filterUserInput,setfilterUserInput] = useState('')
     const [userFilterData,setuserFilterData] = useState([])
     const [message,setMessage] = useState('')
-    const token = localStorage.getItem("token")
-    
+
     const userArray = Object.values(allUser)
 
     useEffect(() => {
-      axios.get("http://localhost:3007/admin/allUsers",{headers:{Authorization:`Bearer ${token}`}})
+      api.get("/admin/allUsers")
       .then(result => {
         if(result.data.message === "All users found" && result.data.result.length > 0 ){
             console.log("Fetch Users:",result.data)

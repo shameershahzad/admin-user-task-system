@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./CreateTask.css"
-import axios from 'axios'
+import api from '../../api/axios'
 import { useNavigate } from 'react-router-dom'
 
 function CreateTask() {
@@ -15,11 +15,9 @@ function CreateTask() {
 
   const nav = useNavigate()
 
-  const token = localStorage.getItem("token")
-
    useEffect(() => {
-    
-    axios.get("http://localhost:3007/admin/sendUseronCreateTask",{headers:{Authorization:`Bearer ${token}`}})
+
+    api.get("/admin/sendUseronCreateTask")
     .then(result => {
       console.log(result.data.result)
       setfetchUser(result.data.result)
@@ -36,7 +34,7 @@ function CreateTask() {
      } 
      else{
       const sendTask = {title,dueDate,userEmail,status,description}
-      axios.post("http://localhost:3007/admin/createTask",sendTask,{headers:{Authorization:`Bearer ${token}`}})
+      api.post("/admin/createTask",sendTask)
       .then(result => {
         console.log("Result:",result)
         if(result.data.message === "Task added!"){

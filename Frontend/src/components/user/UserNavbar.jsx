@@ -1,15 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import "./userNavbar.css"
 import { useNavigate,NavLink,useParams } from 'react-router-dom'
-import axios from 'axios'
+import api from '../../api/axios'
 
 function UserNavbar() {
 
   const [userName,setuserName] = useState(null)
   const {email} = useParams()
-  const token = localStorage.getItem("token")
 
-  
+
   const nav = useNavigate()
 
   const logOutBtn = () => {
@@ -19,7 +18,7 @@ function UserNavbar() {
   } 
 
     useEffect(() => {
-     axios.get(`http://localhost:3007/user/userName/${email}`,{headers:{Authorization:`Bearer ${token}`}})
+     api.get(`/user/userName/${email}`)
      .then(res => {
       console.log(res.data[0])
       setuserName(res.data[0])

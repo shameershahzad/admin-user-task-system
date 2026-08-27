@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import "./SignUp.css"
-import axios from 'axios'
+import api from '../api/axios'
 import { Link,useNavigate } from 'react-router-dom'
 
 function SignUp() {
@@ -23,7 +23,7 @@ function SignUp() {
   }
   console.log("Role:",role)
   
-  axios.post("http://localhost:3007/register/signUp", {
+  api.post("/register/signUp", {
     name,
     email,
     password,

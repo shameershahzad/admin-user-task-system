@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from "axios"
+import api from "../../api/axios"
 import { useState,useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import "./UserDashboard.css"
@@ -7,19 +7,18 @@ import "./UserDashboard.css"
 
 function UserDashboard() {
   const [allTask,setallTask] = useState([])
-  const token = localStorage.getItem("token")
   const{email} = useParams()
   const nav = useNavigate()
 
   useEffect(() => {
-    axios.get(`http://localhost:3007/user/countTaskOnDashboard/${email}`,{headers:{Authorization:`Bearer ${token}`}})
+    api.get(`/user/countTaskOnDashboard/${email}`)
       .then(result => {
         console.log(result.data.result)
         setallTask(result.data.result)
       })
       .catch(err => console.log("Error:",err))
-  },[])
- 
+  },[email])
+
   return (
     <>
     <h1>User Dashboard</h1>

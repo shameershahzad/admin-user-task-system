@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import "./Login.css"
-import axios from 'axios'
+import api from '../api/axios'
 import { Link,useNavigate } from 'react-router-dom'
 
 function Login() {
@@ -13,7 +13,7 @@ function Login() {
 const handleSubmit = (e) => {
   e.preventDefault()
   
-  axios.post("http://localhost:3007/register/",{email,password})
+  api.post("/register/",{email,password})
   .then(result => {
  
        console.log("Result",result.data);
@@ -66,7 +66,7 @@ const handleSubmit = (e) => {
      if(!email){
       setMessage("Please enter email to forgot password")
      }else{
-        axios.post("http://localhost:3007/register/verifyEmail",{email})
+        api.post("/register/verifyEmail",{email})
         .then((result) => {
                 if(result.data.message === "Email found" ){
                   navigate(`/forgotPassword/${email}`)
