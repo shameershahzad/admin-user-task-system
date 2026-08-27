@@ -61,7 +61,7 @@ function AllTasks() {
 },[message])
 
 const viewPendingTask = () => {
-    axios.get("http://localhost:3007/admin/allPendingTasks",{headers:{Authorizaton:`Bearer ${token}`}})
+    axios.get("http://localhost:3007/admin/allPendingTasks",{headers:{Authorization:`Bearer ${token}`}})
     .then(result => {
       if(result.data.message === "Task found" && result.data.result.length > 0){
         console.log(result.data.result)
@@ -81,7 +81,7 @@ const viewPendingTask = () => {
 }
 
 const viewCompleteTask = () => {
-     axios.get("http://localhost:3007/admin/allCompleteTasks",{headers:{Authorizaton:`Bearer ${token}`}})
+     axios.get("http://localhost:3007/admin/allCompleteTasks",{headers:{Authorization:`Bearer ${token}`}})
     .then(result => {
       if(result.data.message === "Task found" && result.data.result.length > 0){
         console.log(result.data.result)
