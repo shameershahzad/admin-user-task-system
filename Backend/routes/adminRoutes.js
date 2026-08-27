@@ -100,7 +100,7 @@ router.post("/createTask",verifyToken,async(req,res) => {
     }     
 })
 
-router.get("/allPendingTasks",async(req,res) => {
+router.get("/allPendingTasks",verifyToken,async(req,res) => {
     try{
         const fetchTasks = await taskModel.find({status:"pending"})
     
@@ -114,7 +114,7 @@ router.get("/allPendingTasks",async(req,res) => {
     }
 })
 
-router.get("/allCompleteTasks",async(req,res) => {
+router.get("/allCompleteTasks",verifyToken,async(req,res) => {
     try{
         const fetchTasks = await taskModel.find({status:"complete"})
     

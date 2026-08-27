@@ -31,13 +31,87 @@ This project is an **Admin-User Task Management System** where the admin can ass
 
 ## 🛠️ Tech Stack
 
-* **Front-end:** HTML, CSS, JavaScript (or your framework)
+* **Front-end:** React (Vite)
 * **Back-end:** Express.js (Node.js)
-* **Database:** MongoDB Atlas (Cloud)
+* **Database:** MongoDB (local or MongoDB Atlas)
+* **Auth:** JWT
 
 ---
 
+## 📁 Project structure
+
+```
+Backend/    Express + MongoDB API (port 3007)
+Frontend/   React + Vite client (port 5173)
+```
+
 ---
+
+## Getting started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18 or newer
+- A MongoDB database — either a local install or a free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster
+
+### 1. Clone and install
+
+```bash
+git clone https://github.com/shameershahzad/admin-user-task-system.git
+cd admin-user-task-system
+```
+
+### 2. Backend setup
+
+```bash
+cd Backend
+npm install
+cp .env.example .env
+```
+
+`Backend/.env`:
+
+| Variable     | Description                                  |
+|--------------|-----------------------------------------------|
+| `MONGO_URI`  | MongoDB connection string                     |
+| `JWT_SECRET` | Any long random string used to sign JWTs      |
+| `PORT`       | Port for the API server (defaults to `3007`)  |
+
+Start the API:
+
+```bash
+npm run dev
+```
+
+You should see `DB connected!` and `Server is running at port: 3007` in the terminal.
+
+### 3. Frontend setup
+
+In a separate terminal:
+
+```bash
+cd Frontend
+npm install
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`. It talks to the API at `http://localhost:3007` by default, so make sure the backend is running first.
+
+The first account you sign up with the role **Admin** becomes the admin account (only one admin is allowed); everyone else signs up as **User**.
+
+---
+
+## Available scripts
+
+**Backend** (`Backend/package.json`)
+- `npm run dev` — start the API with nodemon (auto-restart on changes)
+- `npm start` — start the API with plain Node
+
+**Frontend** (`Frontend/package.json`)
+- `npm run dev` — start the Vite dev server
+- `npm run build` — build for production
+- `npm run lint` — run ESLint
+- `npm run preview` — preview the production build locally
 
 ---
 
