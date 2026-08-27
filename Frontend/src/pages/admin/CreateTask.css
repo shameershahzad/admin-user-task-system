@@ -1,5 +1,7 @@
 .taskDiv {
-  background: #1e2f2f;
+  background: rgba(20, 30, 60, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 24px 32px;
   border-radius: 12px;
   width: 100%;
@@ -41,9 +43,9 @@
 .Input_Group textarea {
   flex: 1;
   padding: 10px 12px;
-  background-color: #355f5f;
-  color: #e0f7fa;
-  border: 1px solid #558b8b;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f1f5ff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 6px;
   font-size: 15px;
 }
@@ -55,15 +57,20 @@
 
 .Input_Group input::placeholder,
 .Input_Group textarea::placeholder {
-  color: #a7caca;
+  color: rgba(241, 245, 255, 0.6);
+}
+
+.Input_Group select option {
+  background-color: #223058;
+  color: #f1f5ff;
 }
 
 .Input_Group input:focus,
 .Input_Group select:focus,
 .Input_Group textarea:focus {
   outline: none;
-  background-color: #407373;
-  border-color: #76c7c0;
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: #73be8f;
 }
 
 .Input_Group textarea {
